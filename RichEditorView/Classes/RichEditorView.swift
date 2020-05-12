@@ -98,11 +98,7 @@ private let DefaultInnerLineHeight: Int = 21
         
     /// The HTML that is currently loaded in the editor view, if it is loaded. If it has not been loaded yet, it is the
     /// HTML that will be loaded into the editor view once it finishes initializing.
-    public var html: String = "" {
-        didSet {
-            setHTML(html)
-        }
-    }
+    private var html: String = ""
     
     /// Private variable that holds the placeholder text, so you can set the placeholder before the editor loads.
     private var placeholderText: String = ""
@@ -169,7 +165,8 @@ private let DefaultInnerLineHeight: Int = 21
         }
     }
     
-    private func setHTML(_ value: String) {
+    public func setHTML(_ value: String) {
+        html = value
         if isEditorLoaded {
             runJS("RE.setHtml('\(value.escaped)')") { _ in
                 self.updateHeight()
